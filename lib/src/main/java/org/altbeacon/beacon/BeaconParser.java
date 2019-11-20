@@ -425,7 +425,6 @@ public class BeaconParser implements Serializable {
         int startByte = 0;
         ArrayList<Identifier> identifiers = new ArrayList<Identifier>();
         ArrayList<Long> dataFields = new ArrayList<Long>();
-
         for (Pdu pdu: advert.getPdus()) {
             if (pdu.getType() == Pdu.GATT_SERVICE_UUID_PDU_TYPE ||
                     pdu.getType() == Pdu.MANUFACTURER_DATA_PDU_TYPE) {
@@ -603,6 +602,8 @@ public class BeaconParser implements Serializable {
             beacon.mIdentifiers = identifiers;
             beacon.mDataFields = dataFields;
             beacon.mRssi = rssi;
+            // TODO : THere is a var upside, assign it
+            beacon.rawData = byteArrayToString(bytesToProcess);
             beacon.mBeaconTypeCode = beaconTypeCode;
             if (mServiceUuid != null) {
                 beacon.mServiceUuid = (int) mServiceUuid.longValue();
@@ -610,7 +611,6 @@ public class BeaconParser implements Serializable {
             else {
                 beacon.mServiceUuid = -1;
             }
-
             beacon.mBluetoothAddress = macAddress;
             beacon.mBluetoothName= name;
             beacon.mManufacturer = manufacturer;

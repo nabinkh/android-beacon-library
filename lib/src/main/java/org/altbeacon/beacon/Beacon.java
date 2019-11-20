@@ -100,6 +100,9 @@ public class Beacon implements Parcelable, Serializable {
      * The measured signal strength of the Bluetooth packet that led do this Beacon detection.
      */
     protected int mRssi;
+
+    // TODO: Write comment
+    protected String rawData;
     /**
      * The calibrated measured Tx power of the Beacon in RSSI
      * This value is baked into an Beacon when it is manufactured, and
@@ -273,6 +276,7 @@ public class Beacon implements Parcelable, Serializable {
         this.mPacketCount = otherBeacon.mPacketCount;
         this.mRssiMeasurementCount = otherBeacon.mRssiMeasurementCount;
         this.mRssi = otherBeacon.mRssi;
+        this.rawData = otherBeacon.rawData;
         this.mTxPower = otherBeacon.mTxPower;
         this.mBluetoothAddress = otherBeacon.mBluetoothAddress;
         this.mBeaconTypeCode = otherBeacon.getBeaconTypeCode();
@@ -362,6 +366,15 @@ public class Beacon implements Parcelable, Serializable {
     public void setRssi(int rssi) {
         mRssi = rssi;
     }
+
+
+    /**
+     * @see #rawData
+     */
+    public String getRawData() {
+        return rawData;
+    }
+
 
     /**
      * @see #mManufacturer
