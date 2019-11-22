@@ -418,11 +418,14 @@ public class BeaconParser implements Serializable {
         return fromScanData(scanData, rssi, device, new Beacon());
     }
 
+
+
     protected Beacon fromScanData(byte[] bytesToProcess, int rssi, BluetoothDevice device, Beacon beacon) {
         BleAdvertisement advert = new BleAdvertisement(bytesToProcess);
         boolean parseFailed = false;
         Pdu pduToParse = null;
         int startByte = 0;
+        String rawData =  bytesToHex(bytesToProcess);
         ArrayList<Identifier> identifiers = new ArrayList<Identifier>();
         ArrayList<Long> dataFields = new ArrayList<Long>();
         for (Pdu pdu: advert.getPdus()) {
@@ -602,8 +605,7 @@ public class BeaconParser implements Serializable {
             beacon.mIdentifiers = identifiers;
             beacon.mDataFields = dataFields;
             beacon.mRssi = rssi;
-            // TODO : THere is a var upside, assign it
-            beacon.rawData = byteArrayToString(bytesToProcess);
+            beacon.rawData = rawData;
             beacon.mBeaconTypeCode = beaconTypeCode;
             if (mServiceUuid != null) {
                 beacon.mServiceUuid = (int) mServiceUuid.longValue();
